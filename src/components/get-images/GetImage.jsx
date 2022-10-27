@@ -1,41 +1,40 @@
 import React, {useEffect, useState} from 'react'
-import AWS_function from '../aws-functions/AWS_function'
+import AWS_function from '../../functions/aws-functions/AWS_function'
 import {Carousel} from 'react-bootstrap';
+import "./Image.css"
 
-function GetImage() {
+function GetImage({bucketName}) {
     const [imageArray, setImageArray] = useState([])
+    const [index, setIndex] = useState(Math.floor(Math.random() * imageArray.length));
     // const dataFetchedRef = useRef(false);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
     
     useEffect(() => {
         //! to render DOM once use following or disable react-strictmode in index.js
         // if (dataFetchedRef.current) return;
         // dataFetchedRef.current = true;
-
-        AWS_function().then(value => { 
-            // setImageArray(value.splice(0,5));
+        
+        AWS_function(bucketName).then(value => { 
+            console.log(value)
             setImageArray(value);
         })
 
-    }, [])
+    }, [bucketName])
     
 
 
   return (
-    <div className="App-header">
-        <Carousel 
-            indicators={true} 
-            // interval={3000}
-            activeIndex={Math.floor(Math.random() * imageArray.length)} 
-            // variant="dark" 
-            touch={true}
-        >
+    <div>
+        <Carousel activeIndex={index} onSelect={handleSelect} slide={true} touch={true} controls={true} indicators={false}>
             {imageArray.map(image => {
                 return (
                     <Carousel.Item key={image}>
-                        <img src={`https://saad-photography.s3.amazonaws.com/${image}`} width="80%" alt={image}/>
+                        <img className="ImageSize" src={`https://${bucketName}.s3.amazonaws.com/${image}`} alt={image}/>
                         <Carousel.Caption>
-                        <h3>Image: {image.split("/")[1]}</h3>
-                        {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+                        <p>Image: {image.split("/")[1]}</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                 )
