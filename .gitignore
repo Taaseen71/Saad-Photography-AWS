@@ -7,7 +7,7 @@ node_modules
 
 # production
 
-
+/build
 # misc
 package-lock.json
 .DS_Store
