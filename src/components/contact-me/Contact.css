@@ -1,0 +1,45 @@
+.iframe {
+    display: flex;
+    min-width: 100%;
+    height: 800px;
+    border: none;
+    background: rgb(59, 155, 178);
+    scroll-behavior: none;
+}
+
+.ContactDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.iframeDivWrapper {
+    display: flex;
+    justify-content: center;
+    height: 635px;
+}
+
+.iframeDiv {
+    margin-top: 30px;
+    width: 450px;
+    max-height: 550px;
+    /* position: absolute; */
+    overflow: hidden;
+    margin-bottom: 100px;
+    /* border-radius: 10px; */
+}
+
+@media screen and (max-width: 480px) {
+    .socialMediaLink {
+        font-size: 15px;
+    }
+    .socialMediaList {
+        padding: 20px 0;
+    }
+    .iframeDiv {
+        height: 800px;
+        width: 300px;
+        border: none;
+        background: rgb(59, 155, 178);
+        scroll-behavior: none;
+    }
+}
