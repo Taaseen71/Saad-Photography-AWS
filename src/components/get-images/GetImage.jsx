@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import AWS_function from '../../functions/aws-functions/AWS_function'
-import {Carousel} from 'react-bootstrap';
+import {Carousel, Button} from 'react-bootstrap';
 // import "./Image.css"
 
 function GetImage({bucketName}) {
@@ -27,6 +27,7 @@ function GetImage({bucketName}) {
     const ImageSize = {
         // minWidth:'80%',
         // maxWidth: '90%',
+        maxWidth: "90%",
         maxHeight: '90vh',
         objectFit: 'contain',
         borderRadius: '15px'
@@ -36,18 +37,33 @@ function GetImage({bucketName}) {
 
   return (
     <div>
-        <Carousel activeIndex={index} onSelect={handleSelect} slide={true} touch={true} controls={true} indicators={false}>
+        <Carousel bsPrefix="carousel" wrap={true} activeIndex={index} onSelect={handleSelect} slide={true} touch={true} controls={false} keyboard={false} indicators={false}>
             {imageArray.map(image => {
                 return (
                     <Carousel.Item key={image}>
                         <img style={{...ImageSize}} src={`https://${bucketName}.s3.amazonaws.com/${image}`} alt={image}/>
                         <Carousel.Caption>
-                        {/* <p>Image: {image.split("/")[1]}</p> */}
                         </Carousel.Caption>
                     </Carousel.Item>
                 )
             })}
         </Carousel>
+            <Button 
+                className="carousel-control-prev" 
+                data-slide="prev"  
+                variant='dark' 
+                onClick={() => {index===0 ? setIndex(imageArray.length-1) : setIndex(index-1)}}
+            >
+                <span aria-hidden="true" className="carousel-control-prev-icon" />
+            </Button>
+            <Button 
+                className="carousel-control-next" 
+                data-slide="prev" 
+                variant='dark' 
+                onClick={() => {index===imageArray.length-1 ? setIndex(0) : setIndex(index+1)}} 
+            >
+                <span aria-hidden="true" className="carousel-control-next-icon" />
+            </Button>
     </div>
   )
 }
