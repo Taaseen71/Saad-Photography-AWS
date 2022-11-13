@@ -23,7 +23,7 @@ function Home() {
                 <HeaderDetails/>
             </FullpageSection>
             <FullpageSection style={{...SectionStyle, backgroundImage: `url(${backgroundWallpaper})`, backgroundSize: 'cover'}}>
-              <GetImage bucketName={"saad-photography"}/>
+              <GetImage bucketName="saad-photography" />
             </FullpageSection>
             <FullpageSection style={{...SectionStyle, backgroundImage: `url(${waterfall})`, backgroundSize: 'cover'}}>
               {/* <GetImage bucketName={"saad-trackday"}/> */}

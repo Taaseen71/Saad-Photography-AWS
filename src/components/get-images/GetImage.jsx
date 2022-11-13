@@ -16,9 +16,9 @@ function GetImage({bucketName}) {
         //! to render DOM once use following or disable react-strictmode in index.js
         // if (dataFetchedRef.current) return;
         // dataFetchedRef.current = true;
-        
+        // console.log(bucketName)
         AWS_function(bucketName).then(value => { 
-            console.log(value)
+            // console.log(value)
             setImageArray(value);
         })
 
