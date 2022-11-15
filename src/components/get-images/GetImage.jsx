@@ -37,9 +37,9 @@ function GetImage({bucketName}) {
 
 
   return (
-       <Container>
-            <Row >
-                <Col xs={1} style={{display: 'flex', alignItems: "center", justifyContent:"flex-start"}}>
+       <Container fluid>
+            <Row>
+                <Col lg={1} md={1} xs={1} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
                     <Button 
                         // className="carousel-control-prev" 
                         data-slide="prev"  
@@ -49,7 +49,7 @@ function GetImage({bucketName}) {
                         <span aria-hidden="true" className="carousel-control-prev-icon" />
                     </Button>
                 </Col>
-                <Col lg={10} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
+                <Col lg={10} md={10} xs={10} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
                     <Carousel bsPrefix="carousel" wrap={true} activeIndex={index} onSelect={handleSelect} slide={true} touch={true} controls={false} keyboard={false} indicators={false}>
                         {imageArray.map(image => {
                             return (
@@ -62,7 +62,7 @@ function GetImage({bucketName}) {
                         })}
                     </Carousel>
                 </Col>
-                <Col xs={1} style={{display: 'flex', alignItems: "center", justifyContent:"flex-end"}}>
+                <Col lg={1} md={1} xs={1}  style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
                         <Button 
                             // className="carousel-control-next" 
                             data-slide="prev" 
