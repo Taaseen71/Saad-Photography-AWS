@@ -30,7 +30,8 @@ function GetImage({bucketName}) {
         maxWidth: "90%",
         maxHeight: '90vh',
         objectFit: 'contain',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        pointerEvent: 'none'
     }
     
 
@@ -41,7 +42,7 @@ function GetImage({bucketName}) {
             {imageArray.map(image => {
                 return (
                     <Carousel.Item key={image}>
-                        <img style={{...ImageSize}} src={`https://${bucketName}.s3.amazonaws.com/${image}`} alt={image}/>
+                        <img style={{...ImageSize}} onContextMenu={(e) => {e.preventDefault(); return false}} src={`https://${bucketName}.s3.amazonaws.com/${image}`} alt={image}/>
                         <Carousel.Caption>
                         </Carousel.Caption>
                     </Carousel.Item>

@@ -15,6 +15,8 @@ function Home() {
         justifyContent: 'center',
         alignItems: 'center'
     }
+    // Disable Right Click on website
+    document.addEventListener('contextmenu', event => event.preventDefault());
   return (
     <Fullpage>
         <FullpageNavigation/>
