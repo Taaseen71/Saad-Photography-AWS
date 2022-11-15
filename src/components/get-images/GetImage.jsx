@@ -27,7 +27,7 @@ function GetImage({bucketName}) {
     const ImageSize = {
         // minWidth:'80%',
         // maxWidth: '90%',
-        // maxWidth: "100%",
+        maxWidth: "100%",
         maxHeight: '90vh',
         objectFit: 'contain',
         borderRadius: '15px',
