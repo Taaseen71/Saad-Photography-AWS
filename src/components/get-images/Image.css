@@ -1,6 +1,5 @@
-.ImageSize{
-    width: 80%;
-    max-width: 100vw;
-    max-height: 100vh;
-    object-fit: contain;
+@media only screen and (max-width: 600px) {
+   .displayNone {
+    display: none;
+   }
 }
