@@ -10,6 +10,7 @@
     "aws-sdk": "^2.1241.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.2",
+    "keen-slider": "^6.8.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",

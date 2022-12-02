@@ -1,78 +1,78 @@
 import React, {useEffect, useState} from 'react'
 import AWS_function from '../../functions/aws-functions/AWS_function'
-import {Carousel, Button, Container, Row, Col} from 'react-bootstrap';
+import { Container,} from 'react-bootstrap';
+import 'keen-slider/keen-slider.min.css'
+import { useKeenSlider } from 'keen-slider/react'
 // import "./Image.css"
 
 function GetImage({bucketName}) {
     const [imageArray, setImageArray] = useState([])
-    const [index, setIndex] = useState(Math.floor(Math.random() * imageArray.length));
+    // const [index, setIndex] = useState(Math.floor(Math.random() * imageArray.length));
     // const dataFetchedRef = useRef(false);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
+    // const handleSelect = (selectedIndex, e) => {
+    //     setIndex(selectedIndex);
+    // };
+
+    const [sliderRef, instanceRef] = useKeenSlider(
+            {
+                slideChanged() {
+                console.log('slide changed')
+                },
+                // vertical: true
+            },
+            [
+                // add plugins here
+                
+            ]
+        )
     
     useEffect(() => {
-        //! to render DOM once use following or disable react-strictmode in index.js
-        // if (dataFetchedRef.current) return;
-        // dataFetchedRef.current = true;
-        // console.log(bucketName)
         AWS_function(bucketName).then(value => { 
-            // console.log(value)
             setImageArray(value);
         })
 
     }, [bucketName])
 
     const ImageSize = {
-        // minWidth:'80%',
-        // maxWidth: '90%',
         maxWidth: "100%",
         maxHeight: '90vh',
-        objectFit: 'contain',
-        borderRadius: '15px',
-        pointerEvent: 'none'
+        // objectFit: 'contain', 
+        // pointerEvent: 'none',
+        // padding: '50px'
+    }
+
+    const container = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: "center"
     }
     
 
 
   return (
        <Container fluid>
-            <Row>
-                <Col lg={1} md={1} xs={1} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
-                    <Button 
-                        // className="carousel-control-prev" 
-                        data-slide="prev"  
-                        variant='primary' 
-                        onClick={() => {index===0 ? setIndex(imageArray.length-1) : setIndex(index-1)}}
-                    >
-                        <span aria-hidden="true" className="carousel-control-prev-icon" />
-                    </Button>
-                </Col>
-                <Col lg={10} md={10} xs={10} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
-                    <Carousel bsPrefix="carousel" wrap={true} activeIndex={index} onSelect={handleSelect} slide={true} touch={true} controls={false} keyboard={false} indicators={false}>
-                        {imageArray.map(image => {
-                            return (
-                                <Carousel.Item key={image}>
-                                    <img style={{...ImageSize}} onContextMenu={(e) => {e.preventDefault(); return false}} src={`https://${bucketName}.s3.amazonaws.com/${image}`} alt={image}/>
-                                    <Carousel.Caption>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            )
-                        })}
-                    </Carousel>
-                </Col>
-                <Col lg={1} md={1} xs={1}  style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
-                        <Button 
-                            // className="carousel-control-next" 
-                            data-slide="prev" 
-                            variant='primary' 
-                            onClick={() => {index===imageArray.length-1 ? setIndex(0) : setIndex(index+1)}} 
-                            >
-                            <span aria-hidden="true" className="carousel-control-next-icon" />
-                        </Button>
-                </Col>
-            </Row>
+            <div  
+                ref={sliderRef} className="keen-slider"
+                
+            > 
+                {imageArray.map(image => {
+                    return (
+                        <div key={image} 
+                            className="keen-slider__slide"
+                            style={{...container}}
+                        >
+                            <img 
+                                style={{...ImageSize}} 
+                                onContextMenu={(e) => {e.preventDefault(); return false}} 
+                                src={`https://${bucketName}.s3.amazonaws.com/${image}`} 
+                                alt={image}
+                                />
+                        </div>
+                    )
+                })}
+            </div>
+
         </Container>
   )
 }
