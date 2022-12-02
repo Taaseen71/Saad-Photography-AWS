@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import AWS_function from '../../functions/aws-functions/AWS_function'
 import {Carousel, Button, Container, Row, Col} from 'react-bootstrap';
-// import "./Image.css"
+import "./Image.css"
 
 function GetImage({bucketName}) {
     const [imageArray, setImageArray] = useState([])
@@ -63,26 +63,24 @@ function GetImage({bucketName}) {
                     </Carousel>
                 </Col>
             </Row>
-            <Row style={{display: 'flex', alignItems: "flex-end", padding: '10px', justifyContent:"center"}}>
-                <Col lg={1} md={1} xs={1} style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
+            <Row className="displayNone" style={{alignItems: "center", margin: '20px', justifyContent:"space-around"}}>
+                <Col lg={10} md={10} xs={10} style={{display: 'flex', alignItems: "center", margin: '20px', justifyContent:"space-between"}}>
                     <Button 
                         // className="carousel-control-prev" 
-                        data-slide="prev"  
+                        data-slide="prev" 
                         variant='primary' 
                         onClick={() => {index===0 ? setIndex(imageArray.length-1) : setIndex(index-1)}}
                     >
                         <span aria-hidden="true" className="carousel-control-prev-icon" />
                     </Button>
-                </Col>
-                <Col lg={1} md={1} xs={1}  style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
-                        <Button 
-                            // className="carousel-control-next" 
-                            data-slide="prev" 
-                            variant='primary' 
-                            onClick={() => {index===imageArray.length-1 ? setIndex(0) : setIndex(index+1)}} 
-                            >
-                            <span aria-hidden="true" className="carousel-control-next-icon" />
-                        </Button>
+                    <Button 
+                        // className="carousel-control-next" 
+                        data-slide="prev" 
+                        variant='primary' 
+                        onClick={() => {index===imageArray.length-1 ? setIndex(0) : setIndex(index+1)}} 
+                    >
+                        <span aria-hidden="true" className="carousel-control-next-icon" />
+                    </Button>
                 </Col>
             </Row>
         </Container>
