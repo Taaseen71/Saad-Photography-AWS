@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import AWS_function from '../../functions/aws-functions/AWS_function'
-import {Carousel, Button, Container, Row, Col} from 'react-bootstrap';
+import {Carousel,Container} from 'react-bootstrap';
+// import {Button, Row, Col} from 'react-bootstrap';
 import "./Image.css"
 
 function GetImage({bucketName}) {
@@ -27,8 +28,8 @@ function GetImage({bucketName}) {
     const ImageSize = {
         // minWidth:'80%',
         // maxWidth: '90%',
-        maxWidth: "100%",
-        maxHeight: '90vh',
+        width: "100%",
+        height: '100vh',
         objectFit: 'contain',
         // borderRadius: '15px',
         pointerEvent: 'none'
@@ -38,15 +39,15 @@ function GetImage({bucketName}) {
 
   return (
       <Container fluid>
-           <Row style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
-                <Col lg={10} md={10} xs={10} >
+           <div style={{display: 'flex', alignItems: "center", justifyContent:"center"}}>
+                <div>
                     <Carousel 
                         bsPrefix="carousel" 
                         wrap={true} 
                         activeIndex={index} 
                         onSelect={handleSelect} slide={true} 
                         touch={true} 
-                        controls={false} 
+                        controls={true} 
                         keyboard={false} 
                         indicators={false}
                         style={{display: 'flex', alignItems: "center", justifyContent:"center"}}
@@ -61,9 +62,9 @@ function GetImage({bucketName}) {
                             )
                         })}
                     </Carousel>
-                </Col>
-            </Row>
-            <Row className="displayNone" style={{alignItems: "center", margin: '20px', justifyContent:"space-around"}}>
+                </div>
+            </div>
+            {/* <Row className="displayNone" style={{alignItems: "center", margin: '20px', justifyContent:"space-around"}}>
                 <Col lg={10} md={10} xs={10} style={{display: 'flex', alignItems: "center", margin: '20px', justifyContent:"space-between"}}>
                     <Button 
                         // className="carousel-control-prev" 
@@ -82,7 +83,7 @@ function GetImage({bucketName}) {
                         <span aria-hidden="true" className="carousel-control-next-icon" />
                     </Button>
                 </Col>
-            </Row>
+            </Row> */}
         </Container>
   )
 }
